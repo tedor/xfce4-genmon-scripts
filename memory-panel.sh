@@ -7,7 +7,7 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Optional icon to display before the text
 # Insert the absolute path of the icon
 # Recommended size is 24x24 px
-readonly ICON="${DIR}/icons/memory/memory.png"
+readonly ICON="${DIR}/icons/memory/memory.svg"
 
 # Calculate RAM values
 readonly TOTAL=$(free -b | awk '/^[Mm]em/{$2 = $2 / 1073741824; printf "%.2f", $2}')
@@ -32,9 +32,9 @@ if [[ $(file -b "${ICON}") =~ PNG|SVG ]]; then
 else
   INFO="<txt>"
 fi
-INFO+="${USED}"
-INFO+="／"
-INFO+="${TOTAL} GB"
+INFO+="${USED} GB"
+#INFO+="/"
+#INFO+="${TOTAL} GB"
 INFO+="</txt>"
 
 # Tooltip
