@@ -7,7 +7,7 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Optional icon to display before the text
 # Insert the absolute path of the icon
 # Recommended size is 24x24 px
-readonly ICON="${DIR}/icons/cpu/chip.png"
+readonly ICON="${DIR}/icons/cpu/chip.svg"
 
 # Array of available logical CPUs
 declare -r CPU_ARRAY=($(awk '/MHz/{print $4}' /proc/cpuinfo | cut -f1 -d"."))
@@ -26,7 +26,7 @@ done
 MORE_INFO+="└─ Temperature: $(sensors | awk '/[Cc]ore\ 0/{print $3}')"
 MORE_INFO+="</tool>"
 STDOUT=$(( STDOUT / NUM_OF_CPUS )) # calculate average clock speed
-STDOUT=$(awk '{$1 = $1 / 1024; printf "%.2f%s", $1, " GHz"}' <<< "${STDOUT}")
+STDOUT=$(awk '{$1 = $1 / 1000; printf "%.2f%s", $1, " GHz"}' <<< "${STDOUT}")
 
 # Panel
 if [[ $(file -b "${ICON}") =~ PNG|SVG ]]; then
